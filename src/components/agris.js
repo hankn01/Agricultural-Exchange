@@ -1,17 +1,45 @@
 import React from 'react';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+
 class Agris extends React.Component {
     render() {
         return(
         <div>
-            <h2>{this.props.name}</h2>
-            <p>일련번호: {this.props.id}</p>
-            <img src={this.props.image}></img>
-            <p>가격(판매가): {this.props.price}</p>
-            <p>암/수 구별: {this.props.gender}</p>
-            <p>원산지: {this.props.origin}</p>
-            <p>친환경 인증사항: {this.props.certi}</p>
-            <p>판매자 정보: </p>
-            <p>판매자가 말한다: </p>
+            <TableRow>
+                <TableCell>{this.props.name}</TableCell>
+                <TableCell><img src={this.props.image} alt="농산물 이미지"></img></TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>일련번호: {this.props.id}</TableCell>
+                <TableCell>가격(판매가): {this.props.price}</TableCell>
+           
+            </TableRow>
+           
+               
+            <TableRow>
+                <TableCell>
+                암/수 구별: {this.props.gender}
+                </TableCell>
+                <TableCell>
+                원산지: {this.props.origin}
+                </TableCell>
+            </TableRow>
+            
+            <TableRow>
+                <TableCell>
+                친환경 인증사항: {this.props.certi}
+                </TableCell>
+                <TableCell>
+                판매자 정보: 
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell>
+                판매자가 말한다:
+                </TableCell>
+            </TableRow>
+            
         </div>
         )
     }
