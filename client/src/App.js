@@ -8,49 +8,44 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import { withStyles} from '@material-ui/core/styles'
+import axios from 'axios'
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit *3,
+    marginTop: theme.spacing(3),
     overflowX: "auto"
   },
   table: {
     minWidth: 1080
   }
-})
+});
 
-const agric = [{
-  'id':1,
-  'image': 'https://placeimg.com/480/360/1',
-  'name': '양파',
-  'price': '3000',
-  'gender': '수',
-  'origin': '대한민국',
-  'certi': '해당 없음'
-},
-{
-  'id':2,
-  'image': 'https://placeimg.com/480/360/2',
-  'name': '배추',
-  'price': '1500',
-  'gender': '해당 없음',
-  'origin': '대한민국',
-  'certi': '해당 없음'
-},
-{
-  'id':3,
-  'image': 'https://placeimg.com/480/360/3',
-  'name': '무',
-  'price': '1500',
-  'gender': '해당 없음',
-  'origin': '대한민국',
-  'certi': '해당 없음'
-}
-]
+
 
 class App extends Component {
+
+  state = {
+    agric: ''
+  }
+
+  componentDidMount() {
+    
+    this.callApi()
+      .then(res=>this.setState({agric: res}))
+      .catch(err=>console.log(err))
+  }
+
+  callApi = async () => {
+    console.log('called API');
+    const response = await axios.get('http://localhost:5000/api/agris');
+    console.log('response: ')
+    console.log(response)
+    return response.data
+    //return fetch('/api/agirs')
+  }
 render() {
   const {classes} = this.props;
+
   return (
     
     <Paper className={classes.root}>
@@ -63,9 +58,9 @@ render() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {agric.map(c => {
-      return (
-        <Agris
+          
+          {this.state.agric?this.state.agric.map(c => {
+      return <Agris
         key={c.id}
         id={c.id}
         image={c.image}
@@ -75,9 +70,9 @@ render() {
         origin={c.origin}
         certi={c.certi}
         />
-      );
+      
 
-    })}
+    }) : "정보를 불러올 수 없습니다. 관리자에게 문의 바랍니다."}
         </TableBody>
       </Table>
       
