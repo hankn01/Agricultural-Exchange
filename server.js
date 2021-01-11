@@ -15,7 +15,7 @@ app.get('/api/agris', (req, res) => {
         {
             'id':1,
             'image': 'http://placeimg.com/480/360/1',
-            'name': '--',
+            'name': '양파',
             'price': '3000',
             'gender': '수',
             'origin': '대한민국',
@@ -24,7 +24,7 @@ app.get('/api/agris', (req, res) => {
           {
             'id':2,
             'image': 'https://placeimg.com/480/360/2',
-            'name': 'ABC',
+            'name': '배추',
             'price': '1500',
             'gender': '해당 없음',
             'origin': '대한민국',
@@ -33,7 +33,7 @@ app.get('/api/agris', (req, res) => {
           {
             'id':3,
             'image': 'https://placeimg.com/480/360/3',
-            'name': 'BACD',
+            'name': '파프리카',
             'price': '1500',
             'gender': '해당 없음',
             'origin': '대한민국',
