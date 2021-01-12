@@ -3,45 +3,37 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
-
+const fs = require('fs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(cors());
 app.options('*', cors());
 
+const data = fs.readFileSync('./database.json');
+const conf = JSON.parse(data);
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: conf.host,
+  user: conf.user,
+  password: conf.password,
+  port: conf.port,
+  database: conf.database
+});
+connection.connect();
+
 app.get('/api/agris', (req, res) => {
-    res.send(
-      [
-        {
-            'id':1,
-            'image': 'http://placeimg.com/480/360/1',
-            'name': '양파',
-            'price': '3000',
-            'gender': '수',
-            'origin': '대한민국',
-            'certi': '해당 없음'
-          },
-          {
-            'id':2,
-            'image': 'https://placeimg.com/480/360/2',
-            'name': '배추',
-            'price': '1500',
-            'gender': '해당 없음',
-            'origin': '대한민국',
-            'certi': '해당 없음'
-          },
-          {
-            'id':3,
-            'image': 'https://placeimg.com/480/360/3',
-            'name': '파프리카',
-            'price': '1500',
-            'gender': '해당 없음',
-            'origin': '대한민국',
-            'certi': '해당 없음'
-          }
-        ]
+    connection.query(
+      "SELECT * FROM AGRICTABLE",
+      (err, rows, fields) => {
+        res.send(rows);
+      }
+    
           
     );
+
+
+
 
 
 });
