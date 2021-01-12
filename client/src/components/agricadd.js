@@ -23,6 +23,16 @@ class Agricadd extends React.Component {
             .then((response) => {
                 console.log(response.data);
             })
+        this.setState({
+            file: null,
+            name: '',
+            price: '',
+            gender: '',
+            origin: '',
+            certi: '',
+            fileName: ''
+        })
+        window.location.reload();
     }
 
     handleFileChange = (e) => {
@@ -38,7 +48,7 @@ class Agricadd extends React.Component {
         this.setState(nextState);
     }
     addagricf = () => {
-        const url = '/api/agric';
+        const url = 'http://localhost:5000/api/agris';
         const formData = new FormData();
         formData.append('image', this.state.file);
         formData.append('name',this.state.name);
@@ -65,7 +75,7 @@ class Agricadd extends React.Component {
         
                 암수: <input type="text" name="gender" value={this.state.gender} onChange={this.handleValueChange}/><br/>
                 원산지: <input type="text" name="origin" value={this.state.origin} onChange={this.handleValueChange}/><br/>
-                인증: <input type="text" name="certi" value={this.state.certi} onClick={this.handleValueChange}/><br/>
+                인증: <input type="text" name="certi" value={this.state.certi} onChange={this.handleValueChange}/><br/>
                 <button type="submit">추가하기</button>
             </form>
         )
