@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Agricadd from './components/agricadd'
 import Paper from '@material-ui/core/Paper'
 import Agris from './components/agris'
 import Table from '@material-ui/core/Table'
@@ -20,7 +21,7 @@ const styles = theme => ({
     minWidth: 1080
   },
   progress: {
-    margin: theme.spacing.unit * 2
+    margin: theme.spacing(2)
   }
 });
 
@@ -57,7 +58,7 @@ render() {
   const {classes} = this.props;
 
   return (
-    
+    <div>
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
@@ -90,10 +91,16 @@ render() {
       </TableCell>
     </TableRow> 
     }
+     
         </TableBody>
       </Table>
       
     </Paper>
+    
+    <Agricadd/>
+    
+    </div>
+    
   );
   }
 }
