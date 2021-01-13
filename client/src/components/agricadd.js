@@ -22,6 +22,7 @@ class Agricadd extends React.Component {
         this.addagricf()
             .then((response) => {
                 console.log(response.data);
+                this.props.stateRefresh();
             })
         this.setState({
             file: null,
@@ -32,7 +33,8 @@ class Agricadd extends React.Component {
             certi: '',
             fileName: ''
         })
-        window.location.reload();
+        //window.location.reload();
+        this.props.stateRefresh();
     }
 
     handleFileChange = (e) => {

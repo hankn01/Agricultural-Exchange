@@ -29,9 +29,26 @@ const styles = theme => ({
 
 class App extends Component {
 
-  state = {
-    agric: '',
-    completed: 0
+  //state = {
+    //agric: '',
+    //completed: 0
+  //}
+  constructor(props) {
+    super(props);
+    this.state = {
+      agric: '',
+      completed: 0
+    }
+  }
+
+  stateRefresh = () => {
+      this.setState({
+        agric: '',
+        completed: 0
+      });
+      this.callApi()
+        .then(res=>this.setState({agric:res}))
+        .catch(err =>console.log(err));
   }
 
   componentDidMount() {
@@ -97,7 +114,7 @@ render() {
       
     </Paper>
     
-    <Agricadd/>
+    <Agricadd stateRefresh={this.stateRefresh}/>
     
     </div>
     
